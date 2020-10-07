@@ -1,14 +1,26 @@
 #!/usr/bin/python3
 
 import cgi
-import subprocess as sbp
+import subprocess as spb
 
-print("content-type : text/html")
+print("content-type:text/html")
 print()
 
 form_values = cgi.FieldStorage()
 cmd = form_values.getvalue("v")
-process_output = sbp.getoutput(cmd)
+
+cmd = cmd.lower()
+
+if 'free ram' in cmd : 
+    process_output = spb.getoutput('free -m')
+
+elif 'date' in cmd : 
+    process_output = spb.getoutput('date')
+
+elif 'calendar' in cmd : 
+    process_output = spb.getoutput('cal')
+
+
 
 print(process_output)
 
