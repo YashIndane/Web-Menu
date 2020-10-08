@@ -3,7 +3,7 @@
 import cgi
 import subprocess as spb
 
-print("content-type:text/html")
+print("content-type:text/plain")
 print()
 
 form_values = cgi.FieldStorage()
