@@ -1,0 +1,32 @@
+#bn{
+
+  position : absolute;
+  outline : none;
+  left : 435;
+  top : 820;
+  width : 110px;
+  height :110px;
+  border-radius:22px;
+  
+
+
+}
+
+#t{
+  
+  position : absolute;
+  left :  165;
+  top : 75;
+  width : 660px; 
+  height : 50px;
+  border-radius : 23px;
+  border-width:thick;
+}
+
+#im{
+
+   position : absolute;
+   left : 300;
+   top:240;
+
+}
