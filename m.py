@@ -20,7 +20,14 @@ elif 'date' in cmd :
 elif 'calendar' in cmd : 
     process_output = spb.getoutput('cal')
 
+elif 'ip configuration' : 
+    process_output = spb.getoutput('sudo ifconfig enp0s3')
 
+elif 'cpu details' in cmd : 
+    process_output = spb.getoutput('sudo lscpu')
+
+elif 'drop cash' in cmd :
+    process_output = spb.getoutput('sudo echo 3 > /proc/sys/vm/drop_caches')
 
 print(process_output)
 
