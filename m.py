@@ -23,8 +23,8 @@ elif 'cal' in cmd or 'calendar' in cmd :
 elif 'lscpu' in cmd  or 'cpu details' in cmd : 
     process_output = spb.getoutput('sudo lscpu')
 
-#elif 'drop cash' in cmd :
-#    process_output = spb.getoutput('sudo echo 3 > /proc/sys/vm/drop_caches')
+elif 'drop cash' in cmd :
+    process_output = spb.getoutput('sudo echo 3 > /proc/sys/vm/drop_caches')
 
 elif 'df -h' in cmd or 'memory information' in cmd : 
      process_output = spb.getoutput('sudo df -h')
