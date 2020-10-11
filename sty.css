@@ -1,32 +1,47 @@
 #bn{
 
-  position : absolute;
-  outline : none;
-  left : 435;
-  top : 820;
-  width : 110px;
-  height :110px;
+  position:absolute;
+  outline:none;
+  left:503;
+  top:1666;
+  width:457px;
+  height : 110px;
   border-radius:22px;
-  
 
 
 }
 
 #t{
-  
+
   position : absolute;
-  left :  165;
+  left : 165;
   top : 75;
-  width : 660px; 
+  width : 660px;
   height : 50px;
   border-radius : 23px;
-  border-width:thick;
+  border-width : thick;
+
+
+
+
 }
 
 #im{
 
-   position : absolute;
-   left : 300;
-   top:240;
+  position : absolute;
+  left : 300;
+  top : 240;
+
+
+}
+
+#sub{
+
+  position : absolute;
+  top : 1666;
+  left : 23;
+  width : 450px;
+  height : 110px;
+  border-radius:22px;
 
 }
