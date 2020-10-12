@@ -43,5 +43,19 @@
   width : 450px;
   height : 110px;
   border-radius:22px;
+}
+
+#reddkr{
+
+   position:absolute;
+   top:1526;
+   color:white;
+   background-color:#0077be;
+   left : 23;
+   width : 936px;
+   height : 110px;
+   border-radius:22px;
+
+
 
 }
