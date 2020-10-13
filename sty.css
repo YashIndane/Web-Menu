@@ -1,4 +1,4 @@
-#bn{
+#bn , #spk{
 
   position:absolute;
   outline:none;
@@ -11,7 +11,7 @@
 
 }
 
-#t{
+#t , #dcm{
 
   position : absolute;
   left : 165;
@@ -35,9 +35,10 @@
 
 }
 
-#sub{
+#sub , #but1{
 
   position : absolute;
+  outline:none;
   top : 1666;
   left : 23;
   width : 450px;
@@ -57,5 +58,62 @@
    border-radius:22px;
 
 
+}
+
+#dkimage{
+   
+   position:absolute;
+   left:330;
+   top :240;
+   width:330px;
+   height:330px;
+
+
 
 }
+
+
+#images{ 
+
+  position:absolute;
+  top:708;
+  left:470;
+  width:337px;
+  height:40px;
+  
+
+
+
+}
+
+#ct{
+
+  position:absolute;
+  top:690;
+  left:172;
+
+
+}
+
+
+#fn{
+
+   position:absolute;
+   top:740;
+   left:172
+
+}
+
+#osn{
+
+  position:absolute;
+  top:758;
+  left:470;
+  width:337px;
+  height:40px;
+  border-width:thick;
+
+
+
+}
+
