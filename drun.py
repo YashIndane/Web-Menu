@@ -37,6 +37,12 @@ elif 'docker ps' in cmd or 'docker status' in cmd :
    
    print(gso('sudo docker ps')[1])
 
+elif 'docker pull' in cmd : 
+   
+   os = cmd.split(' ')[-1]
+   s = gso('sudo ' + 'docker pull ' + os)
+   print(os + 'downloaded sucessfully!' if s[0] == 0 else 'Failed to download!')
+
 elif 'docker images' in cmd or 'available images' in cmd: 
  
    print(f'''--------------DOCKER-IMAGES---------------\n
