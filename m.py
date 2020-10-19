@@ -32,6 +32,9 @@ elif 'df -h' in cmd or 'memory information' in cmd :
 elif 'systemctl status httpd' in cmd or 'server status' in cmd:
      process_output = spb.getoutput('sudo systemctl status httpd')
 
+elif 'systemctl status docker' in cmd or 'docker status' in cmd :
+     process_output = spb.getoutput('sudo systemctl status docker')
+
 elif 'ps -aux' in cmd or 'running processes' in cmd : 
      process_output = spb.getoutput('sudo ps -aux')
 
