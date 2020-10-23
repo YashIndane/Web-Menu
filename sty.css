@@ -46,7 +46,7 @@
   border-radius:22px;
 }
 
-#reddkr , #sl{
+#reddkr, #sl,  #sb{
 
    position:absolute;
    top:1526;
@@ -117,3 +117,14 @@
 
 }
 
+#hdp{
+
+   position:absolute;
+   top:1480;
+   color:white;
+   background-color:#8a2be2;
+   left : 23;
+   width : 936px;
+   height : 110px;
+   border-radius:22px;
+}
