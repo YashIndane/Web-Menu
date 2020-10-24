@@ -1,2 +1,2 @@
 # Web-Menu
-Launch Docker , Hadoop cluster  , etc using voice commands
+Automate Docker , Hadoop etc using voice commands
