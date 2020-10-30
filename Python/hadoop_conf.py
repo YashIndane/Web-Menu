@@ -4,6 +4,7 @@ import subprocess as spb
 
 
 
+
 def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') : 
 
     hadoop = 'hadoop-1.2.1-1.x86_64.rpm'
@@ -22,6 +23,58 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
     if mode == 'datanode' : 
 
         filestatus = spb.getstatusoutput(f'ssh {IP} mkdir /{file_}')
+
+        lv_status = input('Do you want to configure storage as logical volume?[Y/N] ')
+        if lv_status == 'Y': 
+              
+            vg_status = input('Want to create volume group?[Y/N] ')
+            
+            if vg_status == 'Y':
+               
+               vg_name = input('Enter your VG name -> ')
+               
+               
+               vg = f'vgcreate {vg_name}'
+               no_of_hdd = int(input('Enter number of hard disks -> '))
+
+               for a in range(no_of_hdd) : 
+                    hd_n = input('Enter name of hard disk -> ')
+                    status = spb.getstatusoutput(f'ssh {IP} pvcreate {hd_n}')
+                    vg += ' ' + hd_n
+               
+               status = spb.getstatusoutput(f'ssh {IP} vg')
+
+            else : vg_name = input('Enter your VG name -> ')
+            
+            lv_name = input('Enter your logical volume name -> ')
+            lv_size = input('Enter logical volume size -> ')
+            
+            status = spb.getstatusoutput(f'ssh {IP} lvcreate --size {lv_size} --name {lv_name} {vg_name}')
+             
+            status = spb.getstatusoutput(f'mkfs.ext4 /dev/{vg_name}/{lv_name}')
+            status = spb.getstatusoutput(f'mount /dev/{vg_name}/{lv_name} /{file_}')
+            print('Partition->Format->Mount  Done!')
+
+            size_up = input('Want to add any further space to LV?[Y/N] ')
+            
+            if size_up == 'Y' : 
+             
+                s_u = print('Enter space in GiB -> ')
+                
+                status = spb.getstatusoutput(f'ssh {IP} lvextend --size +{s_u}G /dev/{vg_name}/{lv_name} ')
+                status = spb.getstatusoutput(f'ssh {IP} resize2fs /dev/{vg_name}/{lv_name}')
+            
+            
+
+
+                    
+
+               
+               
+               
+               
+           
+              
       
     #Creating core-site file
     #core-site file configuration is same for client,master,slave
@@ -83,7 +136,29 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
        sc = spb.getstatusoutput(f'ssh {IP} rm /etc/hadoop/hdfs-site.xml')
        sc = spb.getstatusoutput(f'scp hdfs-site.xml {IP}:/etc/hadoop')
        sc = spb.getstatusoutput('rm hdfs-site.xml')
-      
+
+
+    else : 
+       
+       c_d = input('Do you want to change default replication factor and block size?[Y/N]')
+       if c_d == 'Y' : 
+
+          cs = spb.getstatusoutput(f'cp /root/hdfs-site.xml /var/www/cgi-bin')
+          rp = int(input('Enter replication factor -> '))
+          bs = int(input('Enter block size in bytes -> '))
+          
+          client_ins=['\<configuration\>' , '' , '\<property\>' , 
+                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>', '\</property\>' , '' , '\<property\>' ,  
+                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>', '\</property\>' , '' , '\</configuration\>']
+
+          for c_li in client_ins : 
+                write = spb.getstatusoutput('echo ' + c_li + '>> hdfs-site.xml')
+          
+
+          sc = spb.getstatusoutput(f'ssh {IP} rm /etc/hadoop/hdfs-site.xml')
+          sc = spb.getstatusoutput(f'scp hdfs-site.xml {IP}:/etc/hadoop')
+          sc = spb.getstatusoutput('rm hdfs-site.xml')
+
 
     #deleating and sending new files
 
