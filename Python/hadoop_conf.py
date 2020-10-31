@@ -42,24 +42,24 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
                     status = spb.getstatusoutput(f'ssh {IP} pvcreate {hd_n}')
                     vg += ' ' + hd_n
                
-               status = spb.getstatusoutput(f'ssh {IP} vg')
+               status = spb.getstatusoutput(f'ssh {IP} {vg}')
 
             else : vg_name = input('Enter your VG name -> ')
             
             lv_name = input('Enter your logical volume name -> ')
-            lv_size = input('Enter logical volume size -> ')
+            lv_size = int(input('Enter logical volume size in GiB -> '))
             
-            status = spb.getstatusoutput(f'ssh {IP} lvcreate --size {lv_size} --name {lv_name} {vg_name}')
+            status = spb.getstatusoutput(f'ssh {IP} lvcreate --size {lv_size}G --name {lv_name} {vg_name}')
              
-            status = spb.getstatusoutput(f'mkfs.ext4 /dev/{vg_name}/{lv_name}')
-            status = spb.getstatusoutput(f'mount /dev/{vg_name}/{lv_name} /{file_}')
+            status = spb.getstatusoutput(f'ssh {IP} mkfs.ext4 /dev/{vg_name}/{lv_name}')
+            status = spb.getstatusoutput(f'ssh {IP} mount /dev/{vg_name}/{lv_name} /{file_}')
             print('Partition->Format->Mount  Done!')
 
             size_up = input('Want to add any further space to LV?[Y/N] ')
             
             if size_up == 'Y' : 
              
-                s_u = print('Enter space in GiB -> ')
+                s_u = int(input('Enter space in GiB -> '))
                 
                 status = spb.getstatusoutput(f'ssh {IP} lvextend --size +{s_u}G /dev/{vg_name}/{lv_name} ')
                 status = spb.getstatusoutput(f'ssh {IP} resize2fs /dev/{vg_name}/{lv_name}')
@@ -148,8 +148,8 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
           bs = int(input('Enter block size in bytes -> '))
           
           client_ins=['\<configuration\>' , '' , '\<property\>' , 
-                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>', '\</property\>' , '' , '\<property\>' ,  
-                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>', '\</property\>' , '' , '\</configuration\>']
+                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>',                      '\</property\>' , '' , '\<property\>' ,  
+                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>',                       '\</property\>' , '' , '\</configuration\>']
 
           for c_li in client_ins : 
                 write = spb.getstatusoutput('echo ' + c_li + '>> hdfs-site.xml')
@@ -216,5 +216,3 @@ elif conf.lower() == 'client':
     buildNode('client' , IP , port , ip_master , 'none' , 'none')   
 
                
-
-   
