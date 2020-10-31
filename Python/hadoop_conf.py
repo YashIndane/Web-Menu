@@ -148,8 +148,8 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
           bs = int(input('Enter block size in bytes -> '))
           
           client_ins=['\<configuration\>' , '' , '\<property\>' , 
-                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>',                      '\</property\>' , '' , '\<property\>' ,  
-                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>',                       '\</property\>' , '' , '\</configuration\>']
+                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>', '\</property\>' , '' , '\<property\>' ,  
+                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>', '\</property\>' , '' , '\</configuration\>']
 
           for c_li in client_ins : 
                 write = spb.getstatusoutput('echo ' + c_li + '>> hdfs-site.xml')
