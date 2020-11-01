@@ -4,6 +4,12 @@ import subprocess as spb
 
 
 
+def putFiles(FILE , ip_) : 
+  
+   sc = spb.getstatusoutput(f'ssh {ip_} rm /etc/hadoop/{FILE}.xml')
+   sc = spb.getstatusoutput(f'scp {FILE}.xml {ip_}:/etc/hadoop')
+   sc = spb.getstatusoutput(f'rm {FILE}.xml')
+
 
 def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') : 
 
@@ -18,6 +24,8 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
                     ]
 
     for op in installations : status = spb.getstatusoutput(op)
+   
+    print('Hadoop installed successfully!' if status[0]==0 else 'Failed to install Hadoop!')
     
     #Building the file
     if mode == 'datanode' : 
@@ -33,7 +41,6 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
                
                vg_name = input('Enter your VG name -> ')
                
-               
                vg = f'vgcreate {vg_name}'
                no_of_hdd = int(input('Enter number of hard disks -> '))
 
@@ -48,12 +55,15 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
             
             lv_name = input('Enter your logical volume name -> ')
             lv_size = int(input('Enter logical volume size in GiB -> '))
-            
+            lv_path = f'/dev/{vg_name}/{lv_name}'
+           
             status = spb.getstatusoutput(f'ssh {IP} lvcreate --size {lv_size}G --name {lv_name} {vg_name}')
+            
+            print(f'logical volume {lv_name} created!' if status[0]==0 else 'Failed to create logical volume!')
              
-            status = spb.getstatusoutput(f'ssh {IP} mkfs.ext4 /dev/{vg_name}/{lv_name}')
-            status = spb.getstatusoutput(f'ssh {IP} mount /dev/{vg_name}/{lv_name} /{file_}')
-            print('Partition->Format->Mount  Done!')
+            status = spb.getstatusoutput(f'ssh {IP} mkfs.ext4 {lv_path}')
+            status = spb.getstatusoutput(f'ssh {IP} mount {lv_path} /{file_}')
+            print('Partition -> Format -> Mount Done!' if status[0]==0 else 'Error!')
 
             size_up = input('Want to add any further space to LV?[Y/N] ')
             
@@ -61,23 +71,15 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
              
                 s_u = int(input('Enter space in GiB -> '))
                 
-                status = spb.getstatusoutput(f'ssh {IP} lvextend --size +{s_u}G /dev/{vg_name}/{lv_name} ')
-                status = spb.getstatusoutput(f'ssh {IP} resize2fs /dev/{vg_name}/{lv_name}')
+                status = spb.getstatusoutput(f'ssh {IP} lvextend --size +{s_u}G {lv_path}')
+                status = spb.getstatusoutput(f'ssh {IP} resize2fs {lv_path}')
+                
+                print(f'logical volume {lv_name} extented by {s_u}GiB' if status[0]==0 else 'Failed to extend logical volume!')
             
             
 
-
-                    
-
-               
-               
-               
-               
-           
-              
-      
     #Creating core-site file
-    #core-site file configuration is same for client,master,slave
+    #core-site file configuration is same for client , master , slave
     ip = IP2 if mode in ('datanode' , 'client') else IP
 
     core_ins = [
@@ -133,9 +135,7 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
           
             cs = spb.getstatusoutput('echo ' + ins_ + '>> hdfs-site.xml')
        
-       sc = spb.getstatusoutput(f'ssh {IP} rm /etc/hadoop/hdfs-site.xml')
-       sc = spb.getstatusoutput(f'scp hdfs-site.xml {IP}:/etc/hadoop')
-       sc = spb.getstatusoutput('rm hdfs-site.xml')
+       putFiles('hdfs-site' , IP)
 
 
     else : 
@@ -148,30 +148,26 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
           bs = int(input('Enter block size in bytes -> '))
           
           client_ins=['\<configuration\>' , '' , '\<property\>' , 
-                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>', '\</property\>' , '' , '\<property\>' ,  
-                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>', '\</property\>' , '' , '\</configuration\>']
+                      '\<name\>dfs.replication\</name\>' , f'\<value\>{rp}\</value\>',                      '\</property\>' , '' , '\<property\>' ,  
+                      '\<name\>dfs.block.size\</name\>' , f'\<value\>{bs}\</value\>',                       '\</property\>' , '' , '\</configuration\>']
 
           for c_li in client_ins : 
                 write = spb.getstatusoutput('echo ' + c_li + '>> hdfs-site.xml')
           
 
-          sc = spb.getstatusoutput(f'ssh {IP} rm /etc/hadoop/hdfs-site.xml')
-          sc = spb.getstatusoutput(f'scp hdfs-site.xml {IP}:/etc/hadoop')
-          sc = spb.getstatusoutput('rm hdfs-site.xml')
-
+          putFiles('hdfs-site' , IP)
 
     #deleating and sending new files
 
-    sc = spb.getstatusoutput(f'ssh {IP} rm /etc/hadoop/core-site.xml')
-    sc = spb.getstatusoutput(f'scp core-site.xml {IP}:/etc/hadoop')
-    sc = spb.getstatusoutput(f'rm core-site.xml')
+    putFiles('core-site' , IP)
+
+    print('core-site.xml and hdfs-site.xml configured successfully!')
   
      
-       
-        
     if mode == 'namenode' : 
            
            filestatus = spb.getstatusoutput(f'ssh {IP} mkdir /{filem_}')
+           filestatus = print('Want to format[Y/N]?')
            filestatus = spb.getstatusoutput(f'ssh {IP} hadoop namenode -format')
     
     if mode in ('namenode' , 'datanode') : 
@@ -191,7 +187,7 @@ def buildNode(mode , IP , PORT , IP2 = 'none', file_='none' , filem_ = 'none') :
 
     else : print(f'{mode} launched!')       
    
-#############################################################################
+################################################################################
 
 IP = input("Enter the IP of remote system -> ")
 conf = input("Configuration type -> ")
@@ -216,3 +212,5 @@ elif conf.lower() == 'client':
     buildNode('client' , IP , port , ip_master , 'none' , 'none')   
 
                
+
+   
