@@ -120,11 +120,26 @@
 #hdp{
 
    position:absolute;
-   top:1480;
+   top:1400;
    color:white;
    background-color:#8a2be2;
    left : 23;
    width : 936px;
    height : 110px;
    border-radius:22px;
+}
+
+#aw{
+   
+   position:absolute;
+   top:1270;
+   color:white;
+   background-color:#dfbd00;
+   left : 23;
+   width : 936px;
+   height : 110px;
+   border-radius:22px;
+
+
+
 }
