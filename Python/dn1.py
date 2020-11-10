@@ -50,7 +50,7 @@ def buildNode(dis) :
                
                vg = f'vgcreate {vg_name}'
             
-#
+
                for i_ in range(n_harddisk) : 
                     
                     status = spb.getstatusoutput(f'{ANS} command -a"pvcreate {harddisk_names[i_]}"')
@@ -172,12 +172,12 @@ port_number = form_values.getvalue('pn')
 wanttocreateLV = form_values.getvalue('lv')
 wanttocreateVG = form_values.getvalue('vg')
 vg_name = form_values.getvalue('vgn')
-n_harddisk = form_values.getvalue('nhd')
+n_harddisk = int(form_values.getvalue('nhd'))
 harddisk_names = form_values.getvalue('HDD').split(' ')
 lv_name = form_values.getvalue('lvn')
-lv_size = form_values.getvalue('lvs')
+lv_size = int(form_values.getvalue('lvs'))
 furtherSpace = form_values.getvalue('ads')
-add_space = form_values.getvalue('ADS')
+add_space = int(form_values.getvalue('ADS'))
 runService = form_values.getvalue('ssv')
 
 DIS = ['datanode' , IP , IP_master , file_name , port_number , wanttocreateLV , wanttocreateVG , vg_name , n_harddisk , harddisk_names , lv_name , lv_size , furtherSpace ,add_space , runService]
