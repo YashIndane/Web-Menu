@@ -10,14 +10,7 @@ It provides facility of Logical Volume Management (LVM) for providing elasticity
 The Apache HTTP Server, colloquially called Apache, is a free and open-source cross-platform web server software, released under the terms of Apache License 2.0. 
 
 ## Installation (RHEL7 and above)
+
 ```
 yum install httpd
-```
-To check status of httpd
-```
-systemctl status httpd
-```
-To enable httpd (i.e to start it on every boot)
-```
-systemctl enable httpd
 ```
