@@ -11,6 +11,14 @@ The Apache HTTP Server, colloquially called Apache, is a free and open-source cr
 
 ## Installation (RHEL7 and above)
 
+The following commands are for installing httpd , checking status of httpd , to enable httpd ,to start the server and to stop the server respectively. 
 ```
-yum install httpd
+yum install httpd 
+
+systemctl status httpd
+systemctl enable htpd
+systemctl start httpd   
+systemctl stop httpd
 ```
+
+
