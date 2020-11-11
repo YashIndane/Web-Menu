@@ -22,4 +22,17 @@ systemctl start httpd
 systemctl stop httpd
 ```
 
+## Hadoop Automation
+
+Apache Hadoop is a collection of open-source software utilities that facilitates using a network of many computers to solve problems involving massive amounts of data and computation. It provides a software framework for distributed storage and processing of big data using the MapReduce programming model.
+Hadoop requires jdk 
+The webapp installs jdk and hadoop by - 
+
+'''
+sudo /usr/local/bin/ansible all -m command -a"rpm -i jdk-8u171-linux-x64.rpm"
+sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm"
+'''
+
+
+
 
