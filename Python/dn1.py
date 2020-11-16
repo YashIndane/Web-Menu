@@ -2,17 +2,18 @@
 
 import cgi
 import subprocess as spb
+import os
 
-print('content-type:text/plain')
+print('content-type:text/html')
 print()
 
 def putFiles(FILE , ip_) : 
   
    sc = spb.getstatusoutput(f'sudo /usr/local/bin/ansible all -m command -a"rm /etc/hadoop/{FILE}.xml"')
 
-   sc = spb.getstatusoutput(f'sudo /usr/local/bin/ansible all -m copy -a"src=/var/www/cgi-bin/{FILE}.xml /etc/hadoop"')
+   sc = spb.getstatusoutput(f'sudo /usr/local/bin/ansible all -m copy -a"src=/ctemp/{FILE}.xml dest=/etc/hadoop"')
 
-   sc = spb.getstatusoutput(f'rm /var/www/cgi-bin/{FILE}.xml')
+   #sc = spb.getstatusoutput(f'rm /var/www/cgi-bin/{FILE}.xml')
 
 
 def buildNode(dis) :
@@ -23,36 +24,39 @@ def buildNode(dis) :
     jdk = 'jdk-8u171-linux-x64.rpm'
 
     ANS = 'sudo /usr/local/bin/ansible all -m'
+    print('Processing.......')
+    print('hello')
    
     installations = [
                       f'{ANS} copy -a"src=/root/{jdk} dest=/root"',
                       f'{ANS} copy -a"src=/root/{hadoop} dest=/root"',
                       f'{ANS} command -a"rpm -i {jdk}"',
-                      f'{ANS} command -a"rpm -1 {hadoop} --force"', 
+                      f'{ANS} command -a"rpm -i {hadoop} --force"', 
                     ]
-
-    for op in installations : status = spb.getstatusoutput(op)
-   
+    
+    #for op in installations : status = spb.getstatusoutput(op)
+    status = [0]
     print('Hadoop installed successfully!' if status[0]==0 else 'Failed to install Hadoop!')
 
     #Building the file
     if mode == 'datanode' : 
-
+        print(1)
         filestatus = spb.getstatusoutput(f'{ANS} command -a"mkdir /{file_name}"')
-        
+        print(2)
         if wanttocreateLV == 'Yes': 
               
            
-            
+            print(3)
             if wanttocreateVG == 'Yes':
                
                
-               
+               print(4)
                vg = f'vgcreate {vg_name}'
             
-
-               for i_ in range(n_harddisk) : 
-                    
+               print(4)
+               for i_ in range(n_harddisk) :
+                    print(5)
+                   #print(f'{ANS} command -a"pvcreate {harddisk_names[i_]}"')
                     status = spb.getstatusoutput(f'{ANS} command -a"pvcreate {harddisk_names[i_]}"')
                     vg += ' ' + harddisk_names[i_]
                
@@ -86,6 +90,8 @@ def buildNode(dis) :
 
     #Creating core-site file
     ip = IP_master
+    vz = spb.getstatusoutput('sudo cp /root/core-site.xml /ctemp')
+    vz = spb.getstatusoutput('sudo chown apache /ctemp/core-site.xml')
 
     core_ins = [
                 '\<configuration\> ',
@@ -105,14 +111,18 @@ def buildNode(dis) :
                 '\</configuration\> '
                ]
 
-    cs = spb.getstatusoutput('cp /root/core-site.xml /var/www/cgi-bin')
+      
 
     for ins in core_ins : 
-           cs = spb.getstatusoutput('echo ' + ins + '>> core-site.xml')
-
+        cs =  spb.getstatusoutput(f'sudo echo {ins} >> /ctemp/core-site.xml')       
+   
+    
     
     #creating hdfs-site file
     if mode == 'datanode' : 
+       vz = spb.getstatusoutput('sudo cp /root/hdfs-site.xml /ctemp')
+       vz = spb.getstatusoutput('sudo chown apache /ctemp/hdfs-site.xml')
+
 
        F =  file_name 
 
@@ -134,11 +144,12 @@ def buildNode(dis) :
                    '\</configuration\> '
                   ]
 
-       cs = spb.getstatusoutput('cp /root/hdfs-site.xml /var/www/cgi-bin')
+
      
        for ins_ in hdfs_ins : 
           
-            cs = spb.getstatusoutput('echo ' + ins_ + '>> hdfs-site.xml')
+            cs = spb.getstatusoutput(f'sudo echo {ins_} >> /ctemp/hdfs-site.xml')
+       
        
        putFiles('hdfs-site' , IP)
 
@@ -182,4 +193,9 @@ runService = form_values.getvalue('ssv')
 
 DIS = ['datanode' , IP , IP_master , file_name , port_number , wanttocreateLV , wanttocreateVG , vg_name , n_harddisk , harddisk_names , lv_name , lv_size , furtherSpace ,add_space , runService]
 
-buildNode(DIS)
+
+buildNode(DIS)   
+
+               
+
+   
