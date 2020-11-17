@@ -33,8 +33,12 @@ The webapp installs jdk and hadoop by -
 
 ```
 sudo /usr/local/bin/ansible all -m command -a"rpm -i jdk-8u171-linux-x64.rpm"
-sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm"
+sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm --force"
 ```
+
+By default apache does not have permission for writing to a file. In that case make apache owner of that file-
+```chown apache file_path```
+
 
 
 
