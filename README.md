@@ -37,6 +37,7 @@ sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm -
 ```
 
 By default apache does not have permission for writing to a file. In that case make apache owner of that file-
+
 ```chown apache file_path```
 
 
