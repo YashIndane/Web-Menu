@@ -40,6 +40,10 @@ By default apache does not have permission for writing to a file. In that case m
 
 ```chown apache file_path```
 
+### Logical Volume Management (LVM)
+
+This concept is very helpful in scenarios where dynamic rezising of volume is required. Volume can be incresed or decresed on the fly. Steps that Web-Menu uses to do this is.
+![](Images/vl.png)
 
 
 
