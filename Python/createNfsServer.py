@@ -16,15 +16,10 @@ def createServer(X):
  ANS = 'sudo /usr/local/bin/ansible all -m' 
 
  status = spb(f'{ANS} command -a"mkdir /{file}"')
+ A = f'"/{file} {targetIP} '
  
- if permi == 'Read-Write' : 
-    A = f'"/{file} {targetIP} (rw,no_root_squash)"'
+ A += '(rw,no_root_squash)"' if permi == 'Read-Write' else '(ro)"'
 
- else :
-    A = f'"/{file} {targetIP} (ro)"'
- 
-
- 
  status = spb(f'sudo echo {A} >> /ctemp/exports')
  status = spb(f'{ANS} copy -a"src=/ctemp/exports dest=/etc"')  
 
