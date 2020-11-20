@@ -4,7 +4,6 @@ function nn_create(){
      document.write("<input type='text' placeholder='Enter remote IP' name = 'ri'></br>");
      document.write("<input type='text' placeholder='Enter file name' name='fn'></br>");
      document.write("<input type='text' placeholder='Enter port number' name='pn'></br>");
-
      document.write("<p>Want to start the service?</p>")
      document.write("<select name='stv'>");
      document.write("<option>Yes</option>");
@@ -13,17 +12,15 @@ function nn_create(){
      document.write("<input type='submit'>");
      document.write("</form>");
      document.write("");
+     
 }
 
 function dn_create(){ 
     
-     
      document.write("<form action='-------IP-OF-PAGE-------'>");
      document.write("<input type='text' placeholder='Enter Remote IP' name='ip_'></br>");
-     document.write("<input type='text' placeholder='Enter master IP' name='mip_'></br>");      document.write("<input type='text' placeholder= 'Port no.' name='pn'></br>");
-     
-     
-     
+     document.write("<input type='text' placeholder='Enter master IP' name='mip_'></br>");      
+     document.write("<input type='text' placeholder= 'Port no.' name='pn'></br>");
      document.write("<p> Do you want to add logical volume?</p>");
      document.write("<select name='lv'>");
      document.write("<option>Yes</option>"); 
@@ -50,38 +47,27 @@ function dn_create(){
      document.write("<option>Yes</option>");
      document.write("<option>No</option>");
      document.write("</select>");
-
      document.write("<input type='submit'>");
      document.write("</form>");
      document.write("");
  
-
 }
 
 function cl_create(){
     
      document.write("<form action='-------IP-OF-PAGE-------'>");
      document.write("<input type='text' placeholder='Enter Remote IP' name='ip_'></br>");
-     document.write("<input type='text' placeholder='Enter master IP' name='mip_'></br>");      document.write("<input type='text' placeholder= 'Port no.' name='pn'></br>");
-    
+     document.write("<input type='text' placeholder='Enter master IP' name='mip_'></br>"); 
+     document.write("<input type='text' placeholder= 'Port no.' name='pn'></br>");
+     document.write("<p>Want to change defualt replication and block size?</p>");
+     document.write("<select name='ssv' id = 'yn'>");
+     document.write("<option>No</option>");
+     document.write("<option>Yes</option>");
+     document.write("</select>");
+     document.write("<input type='text' placeholder='Replication factor' name='rf_'></br>");
+     document.write("<input type='text' placeholder='Block size' name='bs'>");       
+     document.write("<input type='submit'>");
+     document.write("</form>");
+     document.write("");
 
- 
-    document.write("<p>Want to change defualt replication and block size?</p>");
-    document.write("<select name='ssv' id = 'yn'>");
-    document.write("<option>No</option>");
-    document.write("<option>Yes</option>");
-    document.write("</select>");
-    
-      
-    document.write("<input type='text' placeholder='Replication factor' name='rf_'></br>");
-    document.write("<input type='text' placeholder='Block size' name='bs'>");       
-    
-    document.write("<input type='submit'>");
-    document.write("</form>");
-    document.write("");
-
-
-    
-   
-
-}
+}     
