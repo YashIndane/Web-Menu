@@ -79,7 +79,18 @@ def buildNode(dis) :
             
             if furtherSpace ==  'Yes' : 
              
-         
+                if reduceOther == 'Yes':
+
+                    rCommands = [
+                                  f'unmount {dpath}',
+                                  f'e2fsck -f {dpath}',
+                                  f'resize2fs {dpath} {size_till}G',
+                                  f'lvreduce --size -{msize}G {dpath}'
+                                  f'mount {dpath} {dmp}'   
+                                ]
+
+                    for insc in rCommands : 
+                          status = spb.getstatusoutput(f'{ANS} command -a"{insc}"')  
                 
                 status = spb.getstatusoutput(f'{ANS} command -a"lvextend --size +{add_space}G {lv_path}"')
                 status = spb.getstatusoutput(f'{ANS} command -a"resize2fs {lv_path}"')
