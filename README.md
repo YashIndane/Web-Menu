@@ -60,10 +60,12 @@ For more details and for getting specific version refer to -
 
 https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html
 
-Login inside your account using IAM user id and key 
+for using any of the functionality, login inside your account using IAM user id and key 
 
 ```
 aws configure
 ```
+This web-app can start and stop EC2 instance , create security groups , create S3 bucket and create distribution for using CDN.
+
 
 
