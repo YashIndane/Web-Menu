@@ -69,5 +69,7 @@ This web-app can start and stop EC2 instance , create security groups , create S
 
 ![](Images/1.png)
 
+Example lets's create a S3 bucket for object type storage-
+
 
 
