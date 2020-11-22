@@ -67,5 +67,7 @@ aws configure
 ```
 This web-app can start and stop EC2 instance , create security groups , create S3 bucket and create distribution for using CDN.
 
+![](Images/1.png)
+
 
 
