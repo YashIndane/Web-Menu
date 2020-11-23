@@ -94,6 +94,7 @@ Install by-
 ```
 yum install docker-ce --nobest
 ```
+for getting information about available OS for docker visit [Docker Hub](https://hub.docker.com/search?q=&type=image):whale:
 
 
 
