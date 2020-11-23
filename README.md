@@ -75,5 +75,49 @@ Example lets's create a S3 bucket for object type storage-
 
 ![](Images/2.png)
 
+# Docker automation
+
+Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.
+
+## Installing docker
+
+open the file **/etc/yum.repos.d** , make a new file with extension **.repo** and configure the file as-
+
+
+```
+[tag_name]
+baseurl=https://download.docker.com/linux/centos/7/x86_64/stable/
+gpgcheck=0
+```
+Install by-
+
+```
+yum install docker-ce --nobest
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
