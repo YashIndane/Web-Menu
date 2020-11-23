@@ -22,7 +22,7 @@ systemctl start httpd
 systemctl stop httpd
 ```
 
-As the automation program is a long process , so the server will throw Gateway Timeout error . Just add the line `TimeOut 6000` anywhere in the hadoop configuration file ie. ,
+As the automation program is a long process , so the server will throw **Gateway Timeout error** . Just add the line `TimeOut 6000` anywhere in the hadoop configuration file ie. ,
 `etc/hadoop/conf/hadoop.conf`
 
 ## Hadoop Automation
@@ -47,6 +47,8 @@ This concept is very helpful in scenarios where dynamic rezising of volume is re
 
 # Automating AWS Services
 
+Amazon Web Services is a subsidiary of Amazon providing on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.
+
 ## Installing aws-cli 
 
 for Linux x86(64-bit)
@@ -56,9 +58,7 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 ```
-For more details and for getting specific version refer to -
-
-https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html
+For more details and for getting specific version refer to - [AWS Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html)
 
 for using any of the functionality, login inside your account using IAM user id and key 
 
@@ -82,7 +82,6 @@ Docker is a set of platform as a service products that use OS-level virtualizati
 ## Installing docker
 
 open the file **/etc/yum.repos.d** , make a new file with extension **.repo** and configure the file as-
-
 
 ```
 [tag_name]
