@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/license-MIT-yellow) ![](https://img.shields.io/badge/python-3.8-brightgreen)
 # Web-Menu
-A Webapp that is hosted on a Apache HTTPD server and gives functionality to automate Hadoop-clustering , Docker configuration and AWS. Commands can be spoken or typed in the specific fields. For some commands Ansible has been used.
+A Webapp that is hosted on a Apache HTTPD server and gives functionality to automate Hadoop-clustering , Docker configuration and automating AWS services. Commands can be spoken or typed in the specific fields. For some commands Ansible has been used.
 It provides facility of Logical Volume Management (LVM) for providing elasticity to datanodes.
 
 ![](Images/web2.png)
@@ -93,7 +93,7 @@ Install by-
 ```
 yum install docker-ce --nobest
 ```
-for getting information about available OS for docker visit [Docker Hub](https://hub.docker.com/search?q=&type=image):whale:
+for getting information about available containers for docker visit [Docker Hub](https://hub.docker.com/search?q=&type=image):whale:
 
 
 
