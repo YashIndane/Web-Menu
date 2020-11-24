@@ -95,7 +95,7 @@ yum install docker-ce --nobest
 ```
 for getting information about available containers for docker visit [Docker Hub](https://hub.docker.com/search?q=&type=image):whale:
 
-![](Images/2.png)
+![](Images/66.png)
 
 ![](Images/1.jpg)
 
