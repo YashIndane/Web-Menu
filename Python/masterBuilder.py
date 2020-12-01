@@ -8,7 +8,7 @@ print()
 
 def putFiles(FILE) :
 
-   sc = spb.getstatusoutput(f'sudo /usr/local/bin/ansible all -m command -a"rm /etc/hadoop/{FILE}.xml"')
+   sc = spb.getstatusoutput(f'sudo /usr/local/bin/ansible all -m shell -a"rm /etc/hadoop/{FILE}.xml"')
 
    sc = spb.getstatusoutput(f'sudo /usr/local/bin/ansible all -m copy -a"src=/ctemp/{FILE}.xml dest=/etc/hadoop"')
 
@@ -24,16 +24,18 @@ def buildMaster(Z):
 
     ANS = 'sudo /usr/local/bin/ansible all -m'
     print('Processing.......')
-    print('hello')
+   
 
     installations = [
                       f'{ANS} copy -a"src=/ctemp/{jdk} dest=/root"',
                       f'{ANS} copy -a"src=/ctemp/{hadoop} dest=/root"',
-                      f'{ANS} command -a"rpm -i {jdk}"',
-                      f'{ANS} command -a"rpm -i {hadoop} --force"',
+                      f'{ANS} shell -a"rpm -i /root/{jdk}"',
+                      f'{ANS} shell -a"rpm -i /root/{hadoop} --force"',
                     ]
 
     for op in installations : status = spb.getstatusoutput(op)
+
+    print("hadoop and jdk installed successfully!")
     
     vz = spb.getstatusoutput('sudo cp /root/core-site.xml /ctemp')
     vz = spb.getstatusoutput('sudo chown apache /ctemp/core-site.xml')
@@ -90,13 +92,16 @@ def buildMaster(Z):
 
     putFiles('hdfs-site')
 
-    filestatus = spb.getstatusoutput(f"{ANS} command -a'mkdir /{filename}'")
+    filestatus = spb.getstatusoutput(f"{ANS} shell -a'mkdir /{filename}'")
            
-    filestatus = spb.getstatusoutput(f"{ANS} command -a'hadoop namenode -format'")
+    filestatus = spb.getstatusoutput(f"{ANS} shell -a'echo Y | hadoop namenode -format'")
+
+   
 
     if startService == 'Yes': 
              
-       sc = spb.getstatusoutput(f"{ANS} command -a'hadoop-daemon.sh start namenode'")
+       sc = spb.getstatusoutput(f"{ANS} shell -a'hadoop-daemon.sh start namenode'")
+       fire_wall = spb.getstatusoutput(f"{ANS} firewalld -a'port={port_number}/tcp state=enabled immediate=yes'")
        print(f'namenode launched!' if sc[0] == 0 else 'Failed to launch!')
     
    
