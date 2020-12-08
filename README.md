@@ -114,7 +114,7 @@ The main configuration file is `/etc/exports`.  By default the user only has `re
 
 To access the folder it first has to be mounted. Web-Menu uses Ansible ad-hoc command to mount the folder->
 
-``` sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>"
+```sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>```
 
 
 
