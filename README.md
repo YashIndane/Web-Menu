@@ -102,6 +102,24 @@ for getting information about available containers for docker visit [Docker Hub]
 
 ![](Images/1.jpg)
 
+## NFS
+
+Network File System is a distributed file system protocol originally developed by Sun Microsystems in 1984, allowing a user on a client computer to access files over a computer network much like local storage is accessed.
+
+The main configuration file is `/etc/exports`.  By default the user only has `read-access` to the file , For giving `read-write access` ->
+
+```
+<file-path> <ip> (rw,no_root_squash)
+```
+
+To access the folder it first has to be mounted. Web-Menu uses Ansible ad-hoc command to mount the folder->
+
+``` sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>"
+
+
+
+
+
 
 
 
