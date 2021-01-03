@@ -103,9 +103,9 @@ Now install sshpass by
 yum install sshpass
 ```
 
+mention `privilege escalation` properties inside `/etc/ansible/ansible.cfg`
 
-
-
+For getting information on various Ansible modules used inside `Web Menu` , see here ->  [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html) 
 
 ## Docker automation
 
