@@ -107,6 +107,8 @@ mention `privilege escalation` properties inside `/etc/ansible/ansible.cfg`
 
 For getting information on various Ansible modules used inside `Web Menu` , see here ->  [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html) 
 
+Watch the demo here -> [Demo](https://www.linkedin.com/pulse/creating-haproxy-load-balancing-over-aws-ec-2-one-click-yash-indane/)
+
 ## Docker automation
 
 Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.
