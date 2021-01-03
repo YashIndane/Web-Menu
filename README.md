@@ -82,6 +82,31 @@ Example lets's create a S3 bucket for object type storage-
 
 Amazon Virtual Private Cloud (Amazon VPC) is a service that lets you launch AWS resources in a logically isolated virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
 
+## AWS HAProxy load balancing
+
+HAProxy is free, open source software that provides a high availability load balancer and proxy server for TCP and HTTP-based applications that spreads requests across multiple servers.
+
+This is done with the help of Ansible playbooks. 
+Installing Ansible -
+
+```
+pip3 install ansible
+````
+but for Ansible to work with ssh , we need to install sshpass, and for this we download the already available yum configuration file-
+
+```
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+```
+
+Now install sshpass by
+```
+yum install sshpass
+```
+
+
+
+
+
 ## Docker automation
 
 Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.
