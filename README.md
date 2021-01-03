@@ -43,12 +43,12 @@ By default apache does not have permission for writing to a file. In that case m
 
 ```chown apache file_path```
 
-### Logical Volume Management (LVM)
+## Logical Volume Management (LVM)
 
 This concept is very helpful in scenarios where dynamic rezising of volume is required. Volume can be incresed or decresed on the fly. Steps that Web-Menu uses to do this is.
 ![](Images/vl.png)
 
-# Automating AWS Services
+## Automating AWS Services
 
 Amazon Web Services is a subsidiary of Amazon providing on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis.
 
@@ -78,7 +78,11 @@ Example lets's create a S3 bucket for object type storage-
 
 ![](Images/78.png)
 
-# Docker automation
+## AWS VPC
+
+Amazon Virtual Private Cloud (Amazon VPC) is a service that lets you launch AWS resources in a logically isolated virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
+
+## Docker automation
 
 Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.
 
@@ -115,6 +119,7 @@ The main configuration file is `/etc/exports`.  By default the user only has `re
 To access the folder it first has to be mounted. Web-Menu uses Ansible ad-hoc command to mount the folder->
 
 ```sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>```
+
 
 
 
