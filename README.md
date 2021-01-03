@@ -105,6 +105,18 @@ yum install sshpass
 
 mention `privilege escalation` properties inside `/etc/ansible/ansible.cfg`
 
+jinja syntax has been used in haproxy.cfg file  so that each time new ip is entered in inventory file, this file updates itself automatically.
+
+```
+
+backend app
+      balance        roundrobin
+      {% for ip in groups['backends']%}
+      server app{{ loop.index }} {{ ip }}:80 check
+      {% endfor %}
+      
+```
+
 For getting information on various Ansible modules used inside `Web Menu` , see here ->  [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html) 
 
 Watch the demo here -> [Demo](https://www.linkedin.com/pulse/creating-haproxy-load-balancing-over-aws-ec-2-one-click-yash-indane/)
