@@ -74,6 +74,9 @@ elif 'show partitions' in cmd:
 elif 'show history' in cmd :
     process_output = spb.getoutput('history')
 
+elif 'routing table' in cmd:
+    process_output = spb.getoutput('sudo route -n')
+
 else : 
    process_output = spb.getstatusoutput('sudo ' + cmd)
    print("Successful" if process_output[0]==0 else "Failed")
