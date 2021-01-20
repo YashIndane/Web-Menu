@@ -3,37 +3,60 @@
 
     <title>WELCOME TO DOCKER LAUNCHER</title>
     <meta name = "viewport" content = "user-scalable=no" />
-    <link rel = 'stylesheet' type = 'text/css' href = 'sty.css'>
+    <link rel = 'stylesheet' type = 'text/css' href = 'sty4.css'>
 
   </head>
-  <body>
+ <body>
 
-    <form action = "http://IP/cgi-bin/drun.py">
+   <form action = "http://192.168.29.253/cgi-bin/drun.py">
          
-      <input type = 'text' name = 'dcmd' id = 'dcm'>
-      <h1 id = 'ct'>Choose OS Image</h1> 
-      <select id = 'images' name = 'img'>
+     <input type = 'text' name = 'dcmd' id = 'dcm'>
+     <h1 id = 'ct'>Choose OS Image</h1> 
+     <select id = 'images' name = 'img'>
 
-        <option>ubuntu:14.04</option>
-        <option>centos:7</option>
-        <option>fedora:33</option>
+       <option>centos:5</option>
+       <option>centos:5.11</option>
+       <option>centos:6</option>
+       <option>centos:6.10</option>
+       <option>centos:6.6</option> 
+       <option>centos:6.7</option>
+       <option>centos:6.8</option>
+       <option>centos:6.9</option>
+       <option>centos:latest</option>
+       <option>centos:7</option>
+       <option>centos:7.0.1406</option>
+       <option>centos:7.1.1503</option>
+       <option>centos:7.2.1511</option>
+       <option>centos:7.3.1611</option>
+       <option>centos:7.4.1708</option>
+       <option>centos:7.5.1804</option>
+       <option>centos:7.6.1810</option>
+       <option>centos:7.7.1908</option>
+       <option>centos:7.8.2003</option>
+       <option>centos:7.9.2009</option>
+       <option>centos:8</option>
+       <option>centos:8.3.2011</option>
+       <option>ubuntu:14.04</option>
+       <option>centos:7</option>
+       <option>fedora:33</option>
 
-      </select>
+     </select>
             
-      <h1 id = 'fn'>Name</h1>
-      <input type = 'text' name = 'osname' id = 'osn'>
-      <input type = 'submit' id = 'but1' value = 'RUN'>
+     <h1 id = 'fn'>Name</h1>
+     <input type = 'text' name = 'osname' id = 'osn'>
+     <input type = 'submit' id = 'but1' value = 'RUN'>
 
-    </form>
+   </form>
    
-    <input type = 'button' value = 'SPEAK' id = 'spk'>
-    <image src = 'dk.png' id = 'dkimage'>
+   <input type = 'button' value = 'SPEAK' id = 'spk'>
+   <image src = 'dk.png' id = 'dkimage'>
 
-    <form action = "http://IP/spl.html">
-      <input type = "submit" id = "sl" value = 'SPEAK TO LAUNCH'>
-    </form>
+   <form action = "http://192.168.29.253/spl.html">
+     <input type = "submit" id = "sl" value = 'SPEAK TO LAUNCH'>
+   </form>
     
-    <script src="nat1.js"></script>  
+   <script src="nat1.js"></script>  
      
+   
   </body>
 </html>
