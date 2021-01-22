@@ -140,6 +140,72 @@
    height : 110px;
    border-radius:22px;
 
+}
+
+#nam{
+
+   position:absolute;
+   outline:none;
+   top:230;
+   left:147;
+   width:690px;
+   height:92px;
+   border-radius:20px;
+
+}
+
+
+#dat{
+
+   position:absolute;
+   outline:none;
+   top:420;
+   left:147;
+   width:690px;
+   height:92px;
+   border-radius:20px;
+
+
+}
+
+
+#cle{
+
+   position:absolute;
+   outline:none;
+   top:610;
+   left:147;
+   width:690px;
+   height:92px;
+   border-radius:20px;
+
+}
+
+#nfs{
+
+   position:absolute;
+   outline : none;
+   top:1139;
+   left:23;
+   width:462px;
+   height:110px;
+   border-radius:20px;
+
+
+}
+
+
+#msc{
+
+   position:absolute;
+   outline : none;
+   top:1139;
+   left:495;
+   width:462px;
+   height:110px;
+   border-radius:20px;
+
+
 
 
 }
