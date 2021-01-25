@@ -8,10 +8,9 @@
   height : 110px;
   border-radius:22px;
 
-
 }
 
-#t , #dcm{
+#dcm{
 
   position : absolute;
   left : 165;
@@ -21,17 +20,29 @@
   border-radius : 23px;
   border-width : thick;
 
+}
 
+#t{
 
-
+  position : absolute;
+  left : 165;
+  top : 120;
+  width : 660px;
+  height : 50px;
+  color: white;
+  border-radius : 20px;
+  border-width : medium;
+  background-color: black;
+  border-color: white;
 }
 
 #im{
 
   position : absolute;
-  left : 300;
-  top : 240;
-
+  left : 10;
+  top : 6;
+  width: 970px;
+  height: 1790px;
 
 }
 
@@ -44,9 +55,10 @@
   width : 450px;
   height : 110px;
   border-radius:22px;
+
 }
 
-#reddkr, #sl,  #sb{
+#sl,  #sb{
 
    position:absolute;
    top:1526;
@@ -57,6 +69,19 @@
    height : 110px;
    border-radius:22px;
 
+}
+
+#reddkr{
+   
+   position:absolute;
+   top:1526;
+   left : 23;
+   width : 944px;
+   height : 110px;
+   border-radius:22px;
+   border-color: rgb(255,0,0);
+   color:red;
+   background-color:black;
 
 }
 
@@ -68,10 +93,7 @@
    width:330px;
    height:330px;
 
-
-
 }
-
 
 #images{ 
 
@@ -81,9 +103,6 @@
   width:337px;
   height:40px;
   
-
-
-
 }
 
 #ct{
@@ -92,9 +111,7 @@
   top:690;
   left:172;
 
-
 }
-
 
 #fn{
 
@@ -113,32 +130,33 @@
   height:40px;
   border-width:thick;
 
-
-
 }
 
 #hdp{
 
    position:absolute;
    top:1400;
-   color:white;
-   background-color:#8a2be2;
    left : 23;
-   width : 936px;
+   width : 944px;
    height : 110px;
    border-radius:22px;
+   border-color: rgb(255,0,0);
+   color:red;
+   background-color:black;
+
 }
 
 #aw{
    
    position:absolute;
    top:1270;
-   color:white;
-   background-color:#dfbd00;
+   color:red;
+   background-color:black;
    left : 23;
-   width : 936px;
+   width : 944px;
    height : 110px;
    border-radius:22px;
+   border-color: rgb(255,0,0);
 
 }
 
@@ -154,7 +172,6 @@
 
 }
 
-
 #dat{
 
    position:absolute;
@@ -165,9 +182,7 @@
    height:92px;
    border-radius:20px;
 
-
 }
-
 
 #cle{
 
@@ -190,10 +205,11 @@
    width:462px;
    height:110px;
    border-radius:20px;
-
+   border-color: rgb(255,0,0);
+   color:red;
+   background-color:black;
 
 }
-
 
 #msc{
 
@@ -201,11 +217,12 @@
    outline : none;
    top:1139;
    left:495;
-   width:462px;
+   width:470px;
    height:110px;
    border-radius:20px;
-
-
-
+   border-color: rgb(255,0,0);
+   color:red;
+   background-color:black;
 
 }
+
