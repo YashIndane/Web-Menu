@@ -6,13 +6,7 @@ import cgi
 print('content-type:text/plain')
 print()
 
-form_values = cgi.FieldStorage()
-
-cmd = form_values.getvalue('dcmd').lower()
-osname = form_values.getvalue('osname')
-osimage = form_values.getvalue('img')
-
-print(cmd)
+print("cmd")
 
 '''
 if 'start docker' in cmd: 
