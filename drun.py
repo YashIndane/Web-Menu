@@ -17,5 +17,35 @@ if 'start docker' in cmd:
 
   s = gso('sudo systemctl start docker')
   print('Docker started sucessfully!' if s[0]==0 else 'Failed to start docker!')
+  
+elif 'stop docker' in cmd:
+ 
+   s = gso('sudo systemctl stop docker')
+   print('Docker stopped sucessfully' if s[0]==0 else 'Failed to stop docker!')
+
+elif 'launch os' in cmd :
+  
+  s = gso(f'sudo docker run -d -i -t --name {osname} {osimage}')
+  print('OS launched sucessfully!' if s[0] == 0 else 'Failed to launch!')
+
+elif 'docker state' in cmd :
+   
+   print(gso('sudo docker ps')[1])
+
+elif 'docker pull' in cmd : 
+   
+   os = cmd.split(' ')[-1]
+   s = gso('sudo ' + 'docker pull ' + os)
+   print(os + 'downloaded sucessfully!' if s[0] == 0 else 'Failed to download!')
+
+elif 'available images' in cmd: 
+ 
+   print(f'''--------------DOCKER-IMAGES---------------\n
+         {gso('sudo docker images')[1]}''')
+
+elif 'docker status' in cmd : 
+ 
+   print(f'''--------------DOCKER-STATUS---------------\n
+         {gso('sudo systemctl status docker')[1]}''')
 
  
