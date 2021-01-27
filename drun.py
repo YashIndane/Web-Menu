@@ -51,5 +51,4 @@ elif 'docker status' in cmd :
 else : 
   s = gso('sudo ' + cmd)
   print(s[1] if s[0]==0 else 'Failed')
-
  
