@@ -48,4 +48,8 @@ elif 'docker status' in cmd :
    print(f'''--------------DOCKER-STATUS---------------\n
          {gso('sudo systemctl status docker')[1]}''')
 
+else : 
+  s = gso('sudo ' + cmd)
+  print(s[1] if s[0]==0 else 'Failed')
+
  
