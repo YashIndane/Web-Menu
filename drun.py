@@ -12,7 +12,9 @@ cmd = form_values.getvalue('dcmd').lower()
 osname = form_values.getvalue('osname')
 osimage = form_values.getvalue('img')
 
+print(cmd)
 
+'''
 if 'start docker' in cmd: 
 
   s = gso('sudo systemctl start docker')
@@ -52,3 +54,5 @@ else :
 
   s = gso('sudo ' + cmd)
   print(s[1] if s[0]==0 else 'Failed')
+
+'''
