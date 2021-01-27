@@ -17,7 +17,7 @@ if 'start docker' in cmd:
 
   s = gso('sudo systemctl start docker')
   print('Docker started sucessfully!' if s[0]==0 else 'Failed to start docker!')
-
+  
 elif 'stop docker' in cmd:
  
    s = gso('sudo systemctl stop docker')
@@ -49,6 +49,5 @@ elif 'docker status' in cmd :
          {gso('sudo systemctl status docker')[1]}''')
 
 else : 
-
   s = gso('sudo ' + cmd)
   print(s[1] if s[0]==0 else 'Failed')
