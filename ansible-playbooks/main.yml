@@ -5,23 +5,23 @@
   tasks:
   - name: "provisioning ec2-instance for load balancer"
     shell:
-       cmd: "{{ ap }} launch_LB.yml"
+       cmd: "{{ ap }}  /ansible-scripts/launch_LB.yml"
 
   - name: "configuring load balancer"
     shell:
-       cmd: "{{ ap }} install_HAproxy.yml"
+       cmd: "{{ ap }}  /ansible-scripts/install_HAproxy.yml"
 
   - name: "provisioning ec2-instance for backend-servers"
     shell:
-       cmd: "{{ ap }} launch_backends.yml"
+       cmd: "{{ ap }}  /ansible-scripts/launch_backends.yml"
 
   - name: "configuring backend-servers"
     shell:
-       cmd: "{{ ap }} configure_backend.yml"
+       cmd: "{{ ap }}  /ansible-scripts/configure_backend.yml"
  
   - name: "starting haproxy service..."
     shell:
-       cmd: "{{ ap }} start_LB.yml"
+       cmd: "{{ ap }}  /ansible-scripts/start_LB.yml"
 
 
 
