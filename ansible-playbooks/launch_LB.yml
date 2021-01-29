@@ -1,6 +1,6 @@
 - hosts: localhost
   vars_files:
-  -    details.yml
+  -    /ansible-scripts/details.yml
   
   tasks:
   - pip:
