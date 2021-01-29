@@ -1,6 +1,6 @@
 - hosts: load_balancer
   vars_files:
-  -     details.yml
+  -     /ansible-scripts/details.yml
 
   tasks:
   -  file: 
