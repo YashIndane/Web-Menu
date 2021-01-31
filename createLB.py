@@ -14,10 +14,12 @@ names = [
           ['Backend_Server2' , 'bes2']
         ]
 
+x = subprocess.getstatusoutput('sudo chown apache /ansible-scripts/details.yml')
+
 for tag , n in names: 
 
   l = f'"{tag}: {form_values.getvalue(n)}"'
-  x = subprocess.getstatusoutput(f'sudo echo {l} >> /ansible-scripts/details.yml ')
+  x = subprocess.getstatusoutput(f'sudo echo {l} >> /ansible-scripts/details.yml')
 
 x = subprocess.getstatusoutput('sudo /usr/local/bin/ansible-playbook /ansible-scripts/main.yml')
 
