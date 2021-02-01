@@ -1,0 +1,13 @@
+- hosts: localhost
+  vars_files:
+  -  /ansible-scripts/details.yml
+  tasks:
+  - ec2_group:
+      aws_access_key: "{{ aws_ak }}"
+      aws_secret_key: "{{ aws_sk }}"
+      name: "{{ group_name }}" 
+      region: "{{ reg }}"
+      description: "{{ des }}"
+      state: present
+    
+      
