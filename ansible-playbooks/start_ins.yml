@@ -1,0 +1,9 @@
+- hosts: localhost
+  vars_files:
+  -    /ansible-scripts/details.yml
+
+  tasks: 
+  - ec2:
+      instance_ids: "{{ instance_i }}"
+      state: "{{ instance_state }}"
+      region: "{{ ins_reg }}"
