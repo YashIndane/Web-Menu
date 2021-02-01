@@ -21,7 +21,7 @@ for tag , n in names:
   l = f'"{tag}: {form_values.getvalue(n)}"'
   x = subprocess.getstatusoutput(f'sudo echo {l} >> /ansible-scripts/details.yml ')
 
-x = subprocess.getstatusoutput('sudo /usr/local/bin/ansible-playbook /ansible-scripts/')
+x = subprocess.getstatusoutput('sudo /usr/local/bin/ansible-playbook /ansible-scripts/create_sg.yml')
 
 print(x)
 
