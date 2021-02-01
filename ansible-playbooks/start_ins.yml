@@ -7,3 +7,5 @@
       instance_ids: "{{ instance_i }}"
       state: "{{ instance_state }}"
       region: "{{ ins_reg }}"
+      aws_access_key: "{{ aws_ak }}"
+      aws_secret_key: "{{ aws_sk }}"
