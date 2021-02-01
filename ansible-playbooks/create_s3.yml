@@ -1,0 +1,10 @@
+- hosts: localhost
+  vars_files:
+  -   /ansible-scripts/details.yml
+  tasks:
+  -   s3:
+        aws_access_key: "{{ aws_ak }}"
+        aws_secret_key: "{{ aws_sk }}"
+        region: "{{ bucket_region }}"
+        state: "{{ bucket_state }}"
+        name: "{{ bucket_name }}"
