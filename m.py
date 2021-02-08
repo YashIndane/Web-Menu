@@ -58,3 +58,15 @@ elif 'show hard disk' in cmd:
 
 elif 'show route table' in cmd:
     process_output = spb.getstatusoutput('sudo route -n')
+
+elif 'show physical volume' in cmd:
+    process_output = spb.getstatusoutput('sudo pvdisplay')
+
+elif 'show volume group' in cmd : 
+    process_output = spb.getstatusoutput('sudo vgdisplay')
+
+elif 'show logical volume' in cmd:
+    process_output = spb.getstatusoutput('sudo lvdisplay')
+
+elif 'show partitions' in cmd:
+    process_output = spb.getstatusoutput('sudo lsblk')
