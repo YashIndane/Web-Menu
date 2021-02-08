@@ -16,3 +16,16 @@ recog.onresult = function(event){
 };
 
 button.onclick = () => recog.start();
+
+function speak(msg){
+
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = msg;
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+}
+
+speak('Hi this is your tech assistant, how can I help you');
+
