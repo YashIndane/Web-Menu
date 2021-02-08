@@ -32,3 +32,17 @@ elif 'start' in cmd :
     y = cmd.split(' ')[-1]
     process_output = spb.getstatusoutput('sudo systemctl start ' + y)
     print(y + ' started sucessfully!' if process_output[0] == 0 else 'Failed!')
+
+elif 'stop' in cmd : 
+    z = cmd.split(' ')[-1]
+    process_output = spb.getstatusoutput('sudo systemctl stop ' + z)
+    print(z + ' stopped sucessfully!' if process_output[0] == 0 else 'Failed!')
+
+elif 'drop cash' in cmd :
+    process_output = spb.getstatusoutput('sudo echo 3 > /proc/sys/vm/drop_caches')
+
+elif 'memory information' in cmd : 
+     process_output = spb.getstatusoutput('sudo df -h')
+
+elif 'running processes' in cmd : 
+     process_output = spb.getstatusoutput('sudo ps -aux')
