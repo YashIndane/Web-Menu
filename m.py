@@ -11,9 +11,3 @@ cmd = form_values.getvalue("v")
 
 cmd = cmd.lower()
 T = False
-
-if 'free ram' in cmd : 
-    process_output = spb.getstatusoutput('free -m')
-
-elif 'date' in cmd : 
-    process_output = spb.getstatusoutput('date')
