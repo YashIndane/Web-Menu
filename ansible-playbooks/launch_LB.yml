@@ -37,8 +37,7 @@
        path: "/inven.txt"
        line: "{{ x.instances[0].public_ip_address }}"  
 
-  - wait_for:
-       timeout: 300 
+  
   
 
   
