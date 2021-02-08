@@ -36,7 +36,7 @@ elif 'start' in cmd :
 elif 'stop' in cmd : 
     z = cmd.split(' ')[-1]
     process_output = spb.getstatusoutput('sudo systemctl stop ' + z)
-    print(y + ' stopped sucessfully!' if process_output[0] == 0 else 'Failed!')
+    print(z + ' stopped sucessfully!' if process_output[0] == 0 else 'Failed!')
 
 elif 'drop cash' in cmd :
     process_output = spb.getoutput('sudo echo 3 > /proc/sys/vm/drop_caches')
