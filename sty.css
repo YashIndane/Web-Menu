@@ -1,4 +1,4 @@
-#bn , #spk{
+#spk{
 
   position:absolute;
   outline:none;
@@ -7,6 +7,21 @@
   width:457px;
   height : 110px;
   border-radius:22px;
+
+
+}
+
+#bn{
+
+  position:absolute;
+  outline:none;
+  left:503;
+  top:1666;
+  width:457px;
+  height : 110px;
+  border-radius:22px;
+  background-color: red;
+  border-color: red;
 
 }
 
@@ -46,7 +61,7 @@
 
 }
 
-#sub , #but1{
+#but1{
 
   position : absolute;
   outline:none;
@@ -55,6 +70,20 @@
   width : 450px;
   height : 110px;
   border-radius:22px;
+
+}
+
+#sub{
+
+  position : absolute;
+  outline:none;
+  top : 1666;
+  left : 23;
+  width : 450px;
+  height : 110px;
+  border-radius:22px;
+  background-color: red;
+  border-color: red;
 
 }
 
@@ -225,4 +254,3 @@
    background-color:black;
 
 }
-
