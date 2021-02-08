@@ -23,3 +23,12 @@ elif 'calendar' in cmd :
 
 elif 'cpu details' in cmd : 
     process_output = spb.getstatusoutput('sudo lscpu')
+
+elif 'status of' in cmd :
+    x = cmd.split(' ')[-1]
+    process_output = spb.getstatusoutput('sudo systemctl status ' + x)
+
+elif 'start' in cmd : 
+    y = cmd.split(' ')[-1]
+    process_output = spb.getstatusoutput('sudo systemctl start ' + y)
+    print(y + ' started sucessfully!' if process_output[0] == 0 else 'Failed!')
