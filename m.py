@@ -81,3 +81,7 @@ else :
    process_output = spb.getstatusoutput('sudo ' + cmd)
    print("Successful" if process_output[0]==0 else "Failed")
    T = True
+
+
+
+print(process_output[1] if T else process_output)
