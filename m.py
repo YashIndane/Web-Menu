@@ -46,3 +46,15 @@ elif 'memory information' in cmd :
 
 elif 'running processes' in cmd : 
      process_output = spb.getstatusoutput('sudo ps -aux')
+
+elif 'ports' in cmd : 
+     process_output = spb.getstatusoutput('sudo netstat -tnlp')
+
+elif 'ip configuration' in cmd :
+    process_output = spb.getstatusoutput('sudo ifconfig enp0s3')
+
+elif 'show hard disk' in cmd:
+    process_output = spb.getstatusoutput('sudo fdisk -l')
+
+elif 'show route table' in cmd:
+    process_output = spb.getstatusoutput('sudo route -n')
