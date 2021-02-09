@@ -13,6 +13,6 @@ passwd = form_values.getvalue('pw')
 
 gso('sudo /usr/bin/echo "[minikube_ip]" >> /inven.txt')
 gso(f'sudo /usr/bin/echo "{remote_ip} ansible_user=root ansible_ssh_pass={passwd} ansible_connection=ssh" >> /inven.txt')
-status = gso('sudo /usr/local/bin/ansible-playbook /setup.yml')
+status = gso('sudo /usr/local/bin/ansible-playbook /mini.yml')
 
 print('successful' if status[0]==0 else 'failed')
