@@ -11,6 +11,7 @@ form_values = cgi.FieldStorage()
 remote_ip = form_values.getvalue('-ip-')
 passwd = form_values.getvalue('pw')
 
+status = gso('sudo touch /inven.txt')
 status = gso('sudo chown apache /inven.txt')
 
 status = gso('sudo /usr/bin/echo "[minikube_ip]" >> /inven.txt')
