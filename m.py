@@ -23,6 +23,9 @@ elif 'calendar' in cmd :
 
 elif 'cpu details' in cmd : 
     process_output = spb.getstatusoutput('sudo lscpu')
+    
+elif 'uptime' in cmd :
+    process_output = spb.getstatusoutput('sudo uptime')
 
 elif 'status of' in cmd :
     x = cmd.split(' ')[-1]
