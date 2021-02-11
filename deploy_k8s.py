@@ -29,6 +29,3 @@ status = gso(f'{cmd} /ansible-scripts/master_config.yml')
 status = gso(f'{cmd} /ansible-scripts/worker_config.yml')
 
 print(status[0])
-
-
-
