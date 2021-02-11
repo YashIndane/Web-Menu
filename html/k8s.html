@@ -1,0 +1,16 @@
+<html>
+ <body>
+   
+    <form action = 'http://192.168.29.253/cgi-bin/deploy_k8s.py'>
+
+      <input type = "text" name = "mn" placeholder = "name of master"></br>
+      <input type = "text" name = "w1n" placeholder = "name of worker 1"></br>
+      <input type = "text" name = "w2n" placeholder = "name of worker 2"></br>
+      <input type = "text" name = "cdb" placeholder = "CIDR"></br>
+      <input type = "submit" id = "sbk">
+
+    </form>
+    <script src = "k8s.js"></script>
+
+ </body>
+</html>
