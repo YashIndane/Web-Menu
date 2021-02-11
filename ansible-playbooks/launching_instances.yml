@@ -1,0 +1,95 @@
+- hosts: localhost
+  vars_files:
+  -  /ansible-scripts/details.yml
+  tasks:
+  - name: "installing boto3"
+    pip:
+      name: "boto3"
+
+  - name: "creating inventory"
+    file:
+      path: "/inven.txt"
+      state: touch
+
+  - lineinfile:
+      path: "/inven.txt"
+      line: "[kube_master]"
+
+  - name: "launching ec2-instance for kubernetes master ..."
+    ec2_instance:
+      region: "{{ reg }}"
+      image_id: "{{ img_id }}"
+      instance_type: "{{ i_type }}"
+      vpc_subnet_id: "{{ vpcsi }}"
+      key_name: "{{ key }}"
+      security_group: "{{ sg_group }}"
+      name: "{{ kube_master_name }}"
+      state: present
+      aws_access_key: "{{ aws_ak }}"
+      aws_secret_key: "{{ aws_sk }}"
+      volumes:
+      - device_name: "/dev/xvda"
+        ebs:
+          volume_size: "{{ vol_size }}"
+          delete_on_termination: true
+
+    register: details
+
+      
+  - lineinfile:
+      path: "/inven.txt"
+      line: "{{ details.instances[0].public_ip_address }}"
+
+  - lineinfile:
+      path: "/inven.txt"
+      line: "[kube_workers]"
+
+  - name: "launching ec2-instance for kubernetes worker 1 ..."
+    ec2_instance:
+          region: "{{ reg }}"
+          image_id: "{{ img_id }}"
+          instance_type: "{{ i_type }}"
+          vpc_subnet_id: "{{ vpcsi }}"
+          key_name: "{{ key }}"
+          security_group: "{{ sg_group }}"
+          name: "{{ kube_worker_name1 }}"
+          state: present
+          aws_access_key: "{{ aws_ak }}"
+          aws_secret_key: "{{ aws_sk }}"
+          volumes:
+          - device_name: "/dev/xvda"
+            ebs:
+              volume_size: "{{ vol_size }}"
+              delete_on_termination: true
+
+    register: details1
+
+      
+  - lineinfile:
+          path: "/inven.txt"
+          line: "{{ details1.instances[0].public_ip_address }}"
+
+  - name: "launching ec2-instance for kubernetes worker 2 ..."
+    ec2_instance:
+          region: "{{ reg }}"
+          image_id: "{{ img_id }}"
+          instance_type: "{{ i_type }}"
+          vpc_subnet_id: "{{ vpcsi }}"
+          key_name: "{{ key }}"
+          security_group: "{{ sg_group }}"
+          name: "{{ kube_worker_name2 }}"
+          state: present
+          aws_access_key: "{{ aws_ak }}"
+          aws_secret_key: "{{ aws_sk }}"
+          volumes:
+          - device_name: "/dev/xvda"
+            ebs:
+              volume_size: "{{ vol_size }}"
+              delete_on_termination: true
+
+    register: details2
+
+      
+  - lineinfile:
+          path: "/inven.txt"
+          line: "{{ details2.instances[0].public_ip_address }}"
