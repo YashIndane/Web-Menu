@@ -5,3 +5,5 @@ import cgi
 
 print('content-type:text/plain')
 print()
+
+print('hello')
