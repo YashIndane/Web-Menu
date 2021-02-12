@@ -13,7 +13,7 @@ status = gso('sudo chown apache /ansible-scripts/details.yml')
 names = [  
           ['kube_master_name' , 'mn'],
           ['kube_worker_name1' , 'w1n'],
-          ['kube_worker_name2' , 'w2n']
+          ['kube_worker_name2' , 'w2n'],
           ['cidr_block' , 'cdb']
         ]
 
