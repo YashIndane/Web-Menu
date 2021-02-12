@@ -6,5 +6,5 @@ import cgi
 print('content-type:text/plain')
 print()
 
-form_values = cgi.FieldStorage()
+
 
