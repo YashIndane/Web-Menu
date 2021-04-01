@@ -90,6 +90,6 @@
   - name: "joining master ..."
     shell:
         cmd: "{{ item }}"
-    with_iems:
+    with_items:
         - "chmod +x /jc.sh"
         - "bash /jc.sh"        
