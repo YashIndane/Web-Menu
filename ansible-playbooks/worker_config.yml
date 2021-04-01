@@ -81,3 +81,15 @@
 
   - shell:
         cmd: "sysctl --system"
+   
+  - name: "copying the token file"
+    copy: 
+        src: "/jc.sh"
+        dest: "/"
+     
+  - name: "joining master ..."
+    shell:
+        cmd: "{{ item }}"
+    with_iems:
+        - "chmod +x /jc.sh"
+        - "bash /jc.sh"        
