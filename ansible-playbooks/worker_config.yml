@@ -17,7 +17,7 @@
         description: "repo for kubernetes"
         baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
         enabled: yes
-        repo_gpgcheck: yes
+        repo_gpgcheck: no
         gpgcheck: yes
         gpgkey: 
         -  "https://packages.cloud.google.com/yum/doc/yum-key.gpg"
