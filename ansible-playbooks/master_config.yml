@@ -85,3 +85,13 @@
     - { command: "sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config" }
     - { command: "sudo chown $(id -u):$(id -g) $HOME/.kube/config" }
     - { command: "kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml" }
+    
+  - name: "creating and saving token"
+    shell:
+         cmd: "kubeadm token create --print-join-command > /jc.sh"
+         
+  - name: "fetching token from master"
+    fetch:
+         src: "/jc.sh"
+         dest: "/"
+         flat: yes
