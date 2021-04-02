@@ -5,6 +5,8 @@ It provides facility of Logical Volume Management (LVM) for providing elasticity
 
 ![](Images/web2.png)
 
+![](Images/finalpage.png)
+
 After configuring the httpd server just run - 
 ```
 bash start.sh
