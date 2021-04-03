@@ -2,7 +2,7 @@
 
 - hosts: localhost
   vars_files:
-  -     sample_vars.yml
+  -   /ansible-scripts/details.yml
   tasks:
   - name: "creating a memcached & redis cache servers..."
     elasticache:
