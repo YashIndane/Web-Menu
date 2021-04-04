@@ -22,11 +22,15 @@
         vpc_id: "{{ x['vpc']['id'] }}"
         aws_access_key: "{{ aws_ak }}"
         aws_secret_key: "{{ aws_sk }}"
+        region: "{{ reg }}"
   
     register: igw
 
   - name: "launching subnet"
     ec2_vpc_subnet:
+        aws_access_key: "{{ aws_ak }}"
+        aws_secret_key: "{{ aws_sk }}"
+        region: "{{ reg }}"
         state: present
         az: "{{ reg }}b"
         vpc_id: "{{ x['vpc']['id'] }}"
@@ -59,7 +63,7 @@
         instance_type: "{{ i_type }}"
         vpc_subnet_id: "{{ item.sub_id }}"
         key_name: "{{ key }}"
-        security_group: "{{ sg_group }}"
+        security_group: "default"
         name: "{{ item.instance_name }}"
         state: present
         network:
