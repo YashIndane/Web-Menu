@@ -12,10 +12,10 @@ names = [
           [ 'vpc_name'  , 'vpcn' ],
           [ 'vpc_cidr' , 'vpcc' ],
           [ 'subnet_name1' , 'su1' ],
-          [ 'subnet_name2', 'su2' ]
-          [ 'subnet_cidr1', 'sc1' ]
-          [ 'subnet_cidr2', 'sc2' ]
-          [ 'instance_name1', 'ec1' ]
+          [ 'subnet_name2', 'su2' ],
+          [ 'subnet_cidr1', 'sc1' ],
+          [ 'subnet_cidr2', 'sc2' ],
+          [ 'instance_name1', 'ec1' ],
           [ 'instance_name2', 'ec2' ]
         ]
 
