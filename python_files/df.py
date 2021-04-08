@@ -14,6 +14,8 @@ image_version = form_values.getvalue("ver")
 username = form_values.getvalue("user")
 password = form_values.getvalue("pass")
 
+status = gso('sudo mkdir /dockerfiles')
+
 path = f'/dockerfiles/{name_of_image}'
 
 status = gso(f'sudo mkdir {path}')
@@ -27,4 +29,3 @@ status = gso(f'sudo docker login -u {username} -p {password}')
 status = gso(f'sudo docker push {username}/{name_of_image}:{image_version}')
 
 print(status)
-
