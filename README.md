@@ -43,7 +43,9 @@ sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm -
 
 By default apache does not have permission for writing to a file. In that case make apache owner of that file-
 
-```chown apache file_path```
+```
+chown apache file_path
+```
 
 ## Logical Volume Management (LVM)
 
@@ -89,8 +91,7 @@ Amazon Virtual Private Cloud (Amazon VPC) is a service that lets you launch AWS 
 HAProxy is free, open source software that provides a high availability load balancer and proxy server for TCP and HTTP-based applications that spreads requests across multiple servers.
 
 This is done with the help of Ansible playbooks. 
-Installing Ansible -
-
+Installing Ansible:
 ```
 pip3 install ansible
 ````
@@ -110,7 +111,6 @@ mention `privilege escalation` properties inside `/etc/ansible/ansible.cfg`
 jinja syntax has been used in haproxy.cfg file  so that each time new ip is entered in inventory file, this file updates itself automatically.
 
 ```
-
 backend app
       balance        roundrobin
       {% for ip in groups['backends']%}
@@ -119,7 +119,7 @@ backend app
       
 ```
 
-For getting information on various Ansible modules used inside `Web Menu` , see here ->  [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html) 
+For getting information on various Ansible modules used inside `Web Menu`, see here ->  [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html) 
 
 Watch the demo here -> [Demo](https://www.linkedin.com/pulse/creating-haproxy-load-balancing-over-aws-ec-2-one-click-yash-indane/)
 
@@ -129,14 +129,14 @@ Docker is a set of platform as a service products that use OS-level virtualizati
 
 ## Installing docker
 
-open the file **/etc/yum.repos.d** , make a new file with extension **.repo** and configure the file as-
+open the file **/etc/yum.repos.d**, make a new file with extension **.repo** and configure the file as-
 
 ```
 [tag_name]
 baseurl=https://download.docker.com/linux/centos/7/x86_64/stable/
 gpgcheck=0
 ```
-Install by-
+Install by:
 
 ```
 yum install docker-ce --nobest
@@ -157,6 +157,6 @@ The main configuration file is `/etc/exports`.  By default the user only has `re
 <file-path> <ip> (rw,no_root_squash)
 ```
 
-To access the folder it first has to be mounted. Web-Menu uses Ansible ad-hoc command to mount the folder->
+To access the folder it first has to be mounted. Web-Menu uses Ansible ad-hoc command to mount the folder:
 
 ```sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>```
