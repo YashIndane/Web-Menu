@@ -6,6 +6,6 @@
 <configuration>
 <property>
 <name>dfs.data.dir</name>
-<value>\dn</value>
+<value>/dn</value>
 </property>
 </configuration>
