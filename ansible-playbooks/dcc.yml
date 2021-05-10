@@ -31,7 +31,7 @@
 # for namenode
 - hosts: namenode
   vars_files:
-  - /details.yml
+  - /ansible-scripts/details.yml
   tasks:
 
   - name: "copying configuration files"
@@ -60,7 +60,7 @@
 # for datanodes
 - hosts: datanodes
   vars_files:
-  - /details.yml
+  - /ansible-scripts/details.yml
   tasks:
  
   - name: "copying configuration files"
@@ -86,7 +86,7 @@
 # for jobtracker
 - hosts: jobtracker
   vars_files:
-  - /details.yml
+  - /ansible-scripts/details.yml
   tasks:
  
   - name: "copying configuration files"
@@ -107,7 +107,7 @@
 # for tasktrackers
 - hosts: tasktrackers
   vars_files:
-  - /details.yml
+  - /ansible-scripts/details.yml
   tasks:
 
   - name: "copying configuration files"
@@ -123,7 +123,7 @@
 # for client
 - hosts: client
   vars_files:
-  - /details.yml
+  - /ansible-scripts/details.yml
   tasks:
   
   - name: "copying configuration files"
