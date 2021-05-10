@@ -1,0 +1,137 @@
+---
+- hosts: namenode, datanodes, jobtracker, tasktrackers, client
+  tasks:
+
+
+  - name: "creating folder"
+    file:
+        path: "/software_drt"
+        state: directory
+
+  - name: "copying hadoop rpm"
+    copy:
+        src: "/hadoop-1.2.1-1.x86_64.rpm"
+        dest: "/software_drt"
+
+  - name: "copying jdk rpm"  
+    copy:
+        src: "/jdk-8u171-linux-x64.rpm"
+        dest: "/software_drt"
+ 
+  - name: "installing java"
+    yum:
+        name: "/software_drt/jdk-8u171-linux-x64.rpm"
+        state: present
+        disable_gpg_check: yes
+
+  - name: "installing hadoop"
+    shell: 
+        cmd: "rpm -i /software_drt/hadoop-1.2.1-1.x86_64.rpm --force"
+
+# for namenode
+- hosts: namenode
+  vars_files:
+  - /details.yml
+  tasks:
+
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/core-site-namenode.xml"
+      dest: "/etc/hadoop/core-site.xml"
+
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/hdfs-site-namenode.xml"
+      dest: "/etc/hadoop/hdfs-site.xml"
+
+  - name: "creating folder in namenode"
+    file:
+      path: "/nn"
+      state: directory
+
+  - name: "formatting namenode"
+    shell: 
+      cmd: "echo 'Y' | hadoop namenode -format"
+
+  - name: "starting namenode"
+    shell: 
+      cmd: "hadoop-daemon.sh start namenode"
+
+# for datanodes
+- hosts: datanodes
+  vars_files:
+  - /details.yml
+  tasks:
+ 
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/core-site-datanode.xml"
+      dest: "/etc/hadoop/core-site.xml"
+
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/hdfs-site-datanode.xml"
+      dest: "/etc/hadoop/hdfs-site.xml"
+
+  - name: "creating folder"
+    file:
+      path: "/dn"
+      state: directory
+ 
+  - name: "starting datanode"
+    shell: 
+      cmd: "hadoop-daemon.sh start datanode" 
+
+
+# for jobtracker
+- hosts: jobtracker
+  vars_files:
+  - /details.yml
+  tasks:
+ 
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/core-site-jobtracker.xml"
+      dest: "/etc/hadoop/core-site.xml"
+
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/mapred-site-jobtracker.xml"
+      dest: "/etc/hadoop/mapred-site.xml"
+
+  - name: "starting jobtracker"
+    shell: 
+      cmd: "hadoop-daemon.sh start jobtracker"
+ 
+
+# for tasktrackers
+- hosts: tasktrackers
+  vars_files:
+  - /details.yml
+  tasks:
+
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/mapred-site-tasktracker.xml"
+      dest: "/etc/hadoop/mapred-site.xml"
+
+  - name: "starting tasktracker"
+    shell: 
+      cmd: "hadoop-daemon.sh start tasktracker"
+  
+
+# for client
+- hosts: client
+  vars_files:
+  - /details.yml
+  tasks:
+  
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/core-site-client.xml"
+      dest: "/etc/hadoop/core-site.xml"
+
+  - name: "copying configuration files"
+    template:
+      src: "/ansible-scripts/mapred-site-client.xml"
+      dest: "/etc/hadoop/mapred-site.xml"   

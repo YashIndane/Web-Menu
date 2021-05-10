@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  vars_files:
+  - /ansible-scripts/details.yml
+  tasks:
+  - name: "launch the ec2-instance for namenode and save the ip" 
+    include_tasks: ec2.yml
+    loop:
+    - { ins_name: "namenode" }
+    - { ins_name: "jobtracker" }
+    - { ins_name: "client" }
+
+  - name: "saving group name"
+    lineinfile:
+        path: "/inven.txt"
+        line: "[datanodes]"
+ 
+
+  - name: "launchning ec2-instance for datanodes"
+    include_tasks: ec2_w.yml
+    loop: "{{ datanodes }}"
+
+
+  - name: "saving group name"
+    lineinfile:
+        path: "/inven.txt"
+        line: "[tasktrackers]"
+
+
+  - name: "launchning ec2-instance for datanodes"
+    include_tasks: ec2_w.yml
+    loop: "{{ tasktrackers }}"
+
+    
