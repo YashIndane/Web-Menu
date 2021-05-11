@@ -12,17 +12,17 @@ form_values = cgi.FieldStorage()
 no_of_datanodes = int(form_values.getvalue("nodn"))
 no_of_tasktracker = int(form_values.getvalue("nott"))
 
-status = gso("sudo chown apache /details.yml")
+status = gso("sudo chown apache /ansible-scripts/details.yml")
 
 #datanodes
-status = gso('sudo echo "datanodes:" >> /details.yml')
+status = gso('sudo echo "datanodes:" >> /ansible-scripts/details.yml')
 for i in range(no_of_datanodes):
-  status = gso(f'sudo echo " - dn{i}" >> /details.yml')
+  status = gso(f'sudo echo " - dn{i}" >> /ansible-scripts/details.yml')
 
 #tasktrackers
-status = gso('sudo echo "tasktrackers:" >> /details.yml')
+status = gso('sudo echo "tasktrackers:" >> /ansible-scripts/details.yml')
 for j in range(no_of_tasktracker):
-  status = gso(f'sudo echo " - tt{j}" >> /details.yml')
+  status = gso(f'sudo echo " - tt{j}" >> /ansible-scripts/details.yml')
 
 #running the playbooks
 #launch ec2-instances
