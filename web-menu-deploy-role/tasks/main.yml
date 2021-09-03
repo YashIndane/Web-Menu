@@ -1,0 +1,240 @@
+---
+# tasks file for web-menu-deploy
+
+- firewalld:
+        state: enabled
+        immediate: yes
+        port: "80/tcp"
+
+- selinux:
+        policy: targeted
+        state: permissive
+
+- name: "yum repository configuration"
+  yum_repository:
+        name: "{{ item.na }}"
+        description: "repos for web-menu"
+        baseurl: "{{ item.baseurl }}"
+        gpgcheck: no
+  
+  loop:
+  - {   baseurl: "https://download.docker.com/linux/centos/7/x86_64/stable/" , na: "docker_installation" }
+  - {   baseurl: "file:///run/media/root/RHEL-8-0-0-BaseOS-x86_64/AppStream" , na: "for_appstream" }
+  - {   baseurl: "file:///run/media/root/RHEL-8-0-0-BaseOS-x86_64/BaseOS" , na: "for_baseos" }
+ 
+
+- name: "getting epel repos ..."
+  shell:
+        cmd: "yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y"
+
+- name: "installing ansible, boto , boto3"
+  pip:
+        name: "{{ item.module_name }}"
+  
+  loop:
+
+  - { module_name: "ansible"  }
+  - { module_name: "boto3"    }
+  - { module_name: "boto"     }
+ 
+- name: "installing docker, httpd , sshpass and dos2unix"
+  package:
+        name: "{{ item.package_name }}"
+        state: present
+  
+  loop:
+  - {   package_name: "docker-ce-18.06.3.ce-3.el7.x86_64"   }
+  - {   package_name: "httpd"   }
+  - {   package_name: "sshpass" }
+  - {   package_name: "dos2unix"}
+
+
+- name: "creating directories ..."
+  file:
+        path: "{{ item.DIR_PATH }}"
+        state: directory
+
+  loop:
+  - { DIR_PATH: "/etc/ansible"  }
+  - { DIR_PATH: "/ansible-scripts" }
+
+
+- name: "downloading files ..."
+  get_url:
+        url: "{{ item.FILE_URL }}"
+        dest: "{{ item.FILE_DEST }}"
+        owner: "apache"
+        
+  loop:
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/menu.html" , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/dcc.html"  , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/dock.html" , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/sty.css"        , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/spl.html"  , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/nat1.js"     , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/home.js" ,    FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/dk.js"       , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/Images/backgro.png", FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/Images/dk.png" , FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/aw.html" ,  FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/lbin.html" , FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/voice_lb.js", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/mini.js", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/k8s.js", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/JS/dcc.js", FILE_DEST: "/var/www/html" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/start_instance.html" , FILE_DEST: "/var/www/html"   }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/sgc.html" , FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/cs3.html" , FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/mini.html", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/misc.html", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/k8s.html", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/launch_vpc.html", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/html/df.html", FILE_DEST: "/var/www/html"    }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/drun.py" , FILE_DEST: "/var/www/cgi-bin"       }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/deploy_k8s.py" , FILE_DEST: "/var/www/cgi-bin"       }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/createLB.py" ,   FILE_DEST: "/var/www/cgi-bin" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/awsr_ansible.py",FILE_DEST: "/var/www/cgi-bin" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/create_sg.py"  , FILE_DEST: "/var/www/cgi-bin" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/create_s3.py"  , FILE_DEST: "/var/www/cgi-bin" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/ecache.py"  , FILE_DEST: "/var/www/cgi-bin" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/m.py" , FILE_DEST: "/var/www/cgi-bin"          }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/set_up_minikube.py" , FILE_DEST: "/var/www/cgi-bin"         }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/launch_vpc.py" , FILE_DEST: "/var/www/cgi-bin"         }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/df.py" , FILE_DEST: "/var/www/cgi-bin"         }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/python_files/launch_dcc.py" , FILE_DEST: "/var/www/cgi-bin" }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/start_ins.yml" , FILE_DEST: "/ansible-scripts"          }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/configure_backend.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/install_HAproxy.yml" ,   FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/launch_LB.yml" ,         FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/launch_backends.yml" ,   FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/main.yml" ,              FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/start_LB.yml" ,          FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/create_sg.yml" ,             FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/create_s3.yml" ,             FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/mini.yml" ,             FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/launching_instances.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/master_config.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/worker_config.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/elastic_cache.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/launch_vpc.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/ec2-driver.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/ec2.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/ec2_w.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/dcc.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/core-site-client.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/core-site-datanode.xml" , FILE_DEST: "/ansible-scripts"  } 
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/core-site-jobtracker.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/core-site-namenode.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/hdfs-site-datanode.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/hdfs-site-namenode.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/mapred-site-client.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/mapred-site-jobtracker.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/xml/mapred-site-tasktracker.xml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_URL: "https://raw.githubusercontent.com/YashIndane/Web-Menu/main/ansible-playbooks/ansible.cfg" , FILE_DEST: "/etc/ansible"   } 
+
+- file:
+        path: "/inven.txt"
+        state: touch
+
+- name: "converting files with unix line breaks..."
+  shell:
+        cmd: "dos2unix {{ item.PATH }}"
+  
+  loop:
+  - {   PATH: "/var/www/cgi-bin/drun.py"   }
+  - {   PATH: "/var/www/cgi-bin/createLB.py"  }
+  - {   PATH: "/var/www/cgi-bin/awsr_ansible.py"  }
+  - {   PATH: "/var/www/cgi-bin/create_sg.py"     }
+  - {   PATH: "/var/www/cgi-bin/create_s3.py"     }
+  - {   PATH: "/var/www/cgi-bin/m.py"             }
+  - {   PATH: "/var/www/cgi-bin/set_up_minikube.py" }
+  - {   PATH: "/var/www/cgi-bin/deploy_k8s.py"    }
+  - {   PATH: "/var/www/cgi-bin/ecache.py" }
+  - {   PATH: "/var/www/cgi-bin/launch_vpc.py" }
+  - {   PATH: "/var/www/cgi-bin/df.py" }
+  - {   PATH: "/var/www/cgi-bin/launch_dcc.py" }
+
+
+- file:
+        path: "{{ item.PATH }}"
+        mode: "a+x"
+        
+  loop: 
+  - {   PATH: "/var/www/cgi-bin/drun.py"   }
+  - {   PATH: "/var/www/cgi-bin/createLB.py"  }
+  - {   PATH: "/var/www/cgi-bin/awsr_ansible.py"  }
+  - {   PATH: "/var/www/cgi-bin/create_sg.py"     }
+  - {   PATH: "/var/www/cgi-bin/create_s3.py"     }
+  - {   PATH: "/var/www/cgi-bin/m.py"             }
+  - {   PATH: "/var/www/cgi-bin/set_up_minikube.py" }
+  - {   PATH: "/var/www/cgi-bin/deploy_k8s.py"    }
+  - {   PATH: "/var/www/cgi-bin/ecache.py" }
+  - {   PATH: "/var/www/cgi-bin/launch_vpc.py" }
+  - {   PATH: "/var/www/cgi-bin/df.py" }
+  - {   PATH: "/var/www/cgi-bin/launch_dcc.py" }
+
+- copy:
+        src: "/root/kube-key.pem"
+        dest: "/root"
+        mode: "400"
+
+- copy: 
+        src: "{{ item.FILE_SRC }}"
+        dest: "{{ item.FILE_DEST }}"
+  
+  loop:
+  - {   FILE_SRC: "/details.yml" , FILE_DEST: "/ansible-scripts"  }
+  - {   FILE_SRC: "/haproxy.cfg" , FILE_DEST: "/"    }
+  - {   FILE_SRC: "/lb-page.html", FILE_DEST: "/"    }
+
+- copy:
+        src: "{{ item.SRC }}"
+        dest: "{{ item.DEST }}"
+  loop:
+  - { SRC: "/root/hadoop-1.2.1-1.x86_64.rpm" , DEST: "/"}
+  - { SRC: "/root/jdk-8u171-linux-x64.rpm" , DEST: "/" }
+
+- replace:
+        path: "{{ item.FILE_PATH_ }}"
+        regexp: "IP"
+        replace: "{{ ansible_facts['enp0s3']['ipv4']['address'] }}"
+
+
+  loop:
+  - {   FILE_PATH_: "/var/www/html/menu.html"   }
+  - {   FILE_PATH_: "/var/www/html/dock.html"   } 
+  - {   FILE_PATH_: "/var/www/html/spl.html"    }
+  - {   FILE_PATH_: "/var/www/html/aw.html"     }
+  - {   FILE_PATH_: "/var/www/html/lbin.html"   }
+  - {   FILE_PATH_: "/var/www/html/start_instance.html"   }
+  - {   FILE_PATH_: "/var/www/html/sgc.html"    }
+  - {   FILE_PATH_: "/var/www/html/cs3.html"    }
+  - {   FILE_PATH_: "/var/www/html/mini.html"   }
+  - {   FILE_PATH_: "/var/www/html/misc.html"   }
+  - {   FILE_PATH_: "/var/www/html/k8s.html"    }
+  - {   FILE_PATH_: "/var/www/html/launch_vpc.html" }
+  - {   FILE_PATH_: "/var/www/html/df.html" }
+  - {   FILE_PATH_: "/var/www/html/dcc.html" }
+
+
+- lineinfile:
+        path: "/etc/httpd/conf/httpd.conf"
+        line: "TimeOut 6000"
+        state: present
+        
+
+- lineinfile:
+        insertbefore: "## Allows members of the 'sys' group to run networking, software,"
+        path: "/etc/sudoers"
+        line: "apache   ALL=(ALL)   NOPASSWD: ALL"
+        state: present
+       
+- service:
+        name: "httpd"
+        state: started
+
+
+
+ 
+
+
