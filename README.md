@@ -19,12 +19,12 @@ The Apache HTTP Server, colloquially called Apache, is a free and open-source cr
 
 The following commands are for installing httpd , checking status of httpd , to enable httpd ,to start the server and to stop the server respectively. 
 ```
-yum install httpd 
+$ yum install httpd 
 
-systemctl status httpd
-systemctl enable htpd
-systemctl start httpd   
-systemctl stop httpd
+$ systemctl status httpd
+$ systemctl enable htpd
+$ systemctl start httpd   
+$ systemctl stop httpd
 ```
 
 As the automation program is a long process , so the server will throw **Gateway Timeout error** . Just add the line `TimeOut 6000` anywhere in the hadoop configuration file ie. ,
@@ -37,8 +37,8 @@ Hadoop requires jdk
 The webapp installs jdk and hadoop by - 
 
 ```
-sudo /usr/local/bin/ansible all -m command -a"rpm -i jdk-8u171-linux-x64.rpm"
-sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm --force"
+$ sudo /usr/local/bin/ansible all -m command -a"rpm -i jdk-8u171-linux-x64.rpm"
+$ sudo /usr/local/bin/ansible all -m command -a"rpm -i hadoop-1.2.1-1.x86_64.rpm --force"
 ```
 
 By default apache does not have permission for writing to a file. In that case make apache owner of that file-
@@ -59,16 +59,16 @@ Amazon Web Services is a subsidiary of Amazon providing on-demand cloud computin
 for Linux x86(64-bit)
 
 ```
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
+$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+$ unzip awscliv2.zip
+$ sudo ./aws/install
 ```
 For more details and for getting specific version refer to - [AWS Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html):page_facing_up:
 
 for using any of the functionality, login inside your account using IAM user id and key 
 
 ```
-aws configure
+$ aws configure
 ```
 This web-app can start and stop EC2 instance , create security groups , create S3 bucket and create distribution for using CDN.
 
@@ -92,17 +92,17 @@ This is done with the help of Ansible playbooks.
 Installing Ansible -
 
 ```
-pip3 install ansible
+$ pip3 install ansible
 ````
 but for Ansible to work with ssh , we need to install sshpass, and for this we download the already available yum configuration file-
 
 ```
-yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+$ yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 Now install sshpass by
 ```
-yum install sshpass
+$ yum install sshpass
 ```
 
 mention `privilege escalation` properties inside `/etc/ansible/ansible.cfg`
@@ -139,7 +139,7 @@ gpgcheck=0
 Install by-
 
 ```
-yum install docker-ce --nobest
+$ yum install docker-ce --nobest
 ```
 for getting information about available containers for docker visit [Docker Hub](https://hub.docker.com/search?q=&type=image):whale:
 
@@ -159,4 +159,6 @@ The main configuration file is `/etc/exports`.  By default the user only has `re
 
 To access the folder it first has to be mounted. Web-Menu uses Ansible ad-hoc command to mount the folder->
 
-```sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>```
+```
+$ sudo /usr/local/bin/ansible <ip> -m mount -a"src=<remote_ip>:/<folder path=<mount_point fstype=nfs state=mounted>
+```
