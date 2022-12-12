@@ -3,9 +3,9 @@
 A Webapp that is hosted on a Apache HTTPD server and gives functionality to automate Hadoop-clustering , Docker configuration and automating AWS services. Commands can be spoken or typed in the specific fields. For some commands Ansible has been used.
 It provides facility of Logical Volume Management (LVM) for providing elasticity to datanodes.
 
-![](Images/web2.png)
+![web2](https://user-images.githubusercontent.com/53041219/207016552-0e58f477-189b-4e21-85b7-b09d39631688.png)
 
-![](Images/finalpage.png)
+![finalpage](https://user-images.githubusercontent.com/53041219/207016652-04ad5eef-f8a4-454a-9ef8-3fe08d64892b.png)
 
 After configuring the httpd server just run - 
 ```
@@ -48,7 +48,7 @@ By default apache does not have permission for writing to a file. In that case m
 ## Logical Volume Management (LVM)
 
 This concept is very helpful in scenarios where dynamic rezising of volume is required. Volume can be incresed or decresed on the fly. Steps that Web-Menu uses to do this is.
-![](Images/vl.png)
+![vl](https://user-images.githubusercontent.com/53041219/207016806-f51fcadf-93a6-4aa2-be92-ace2c41b71b7.png)
 
 ## Automating AWS Services
 
@@ -72,13 +72,13 @@ $ aws configure
 ```
 This web-app can start and stop EC2 instance , create security groups , create S3 bucket and create distribution for using CDN.
 
-![](Images/1.png)
+![1](https://user-images.githubusercontent.com/53041219/207016979-ad87549f-11bc-469a-8ecf-d85fe5a4c771.png)
 
 Example lets's create a S3 bucket for object type storage-
 
-![](Images/4.png) ![](Images/3.png)
+![4](https://user-images.githubusercontent.com/53041219/207017104-f080b612-132b-4edf-9b6b-c22ac6288cb4.png) ![3](https://user-images.githubusercontent.com/53041219/207017145-e2050dff-74c2-40f8-94e1-32da429394e0.png)
 
-![](Images/78.png)
+![78](https://user-images.githubusercontent.com/53041219/207017187-47fc5e94-12e0-4ea5-8ab3-3ee12900b5cb.png)
 
 ## AWS VPC
 
@@ -143,9 +143,9 @@ $ yum install docker-ce --nobest
 ```
 for getting information about available containers for docker visit [Docker Hub](https://hub.docker.com/search?q=&type=image):whale:
 
-![](Images/66.png)
+![66](https://user-images.githubusercontent.com/53041219/207017375-ce41274b-d45e-4e46-a6c0-306b98bf6e59.png)
 
-![](Images/1.jpg)
+![1](https://user-images.githubusercontent.com/53041219/207017453-554536b3-4c7f-4714-a5f6-aa6eab81df78.jpg)
 
 ## NFS
 
